@@ -1,0 +1,10 @@
+name: "net-basic-org1"
+version: "1.0"
+
+client:
+  organization: Org1
+  credentialStore:
+    path: "./hfc-key-store"
+    cryptoStore:
+      path: "./hfc-key-store"
+    wallet: wallet-name

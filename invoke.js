@@ -12,10 +12,12 @@ var Fabric_Client = require('fabric-client');
 var path = require('path');
 var util = require('util');
 var os = require('os');
+let fs = require('fs');
 
 //
-var fabric_client = new Fabric_Client();
-
+//var fabric_client = new Fabric_Client();
+var fabric_client = Fabric_Client.loadFromConfig('network-config.yaml');
+fabric_client.loadFromConfig('org1.yaml');
 // setup the fabric network
 var channel = fabric_client.newChannel('mychannel');
 var peer = fabric_client.newPeer('grpc://localhost:7051');
@@ -59,7 +61,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	// changeCarOwner chaincode function - requires 2 args , ex: args: ['CAR10', 'Dave'],
 	// must send the proposal to endorsing peers
 	var request = {
-		//targets: let default to the peer assigned to the client
+		targets: ['peer0.org1.example.com'],
 		chaincodeId: 'mycc',
 		fcn: 'reg',
 		args: ['Test'],
