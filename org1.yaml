@@ -6,5 +6,5 @@ client:
   credentialStore:
     path: "./hfc-key-store"
     cryptoStore:
-      path: "./hfc-key-store"
+      path: "./hfc-key-store/crypto"
     wallet: wallet-name
