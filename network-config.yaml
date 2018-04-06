@@ -18,6 +18,18 @@ channels:
         chaincodeQuery: true
         ledgerQuery: true
         eventSource: false
+      
+      peer0.org2.example.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      
+      peer1.org2.example.com:
+        endorsingPeer: false
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: false
 
 organizations:
   Org1:
@@ -29,9 +41,22 @@ organizations:
     certificateAuthorities:
       - ca.org1.example.com
     adminPrivateKey:
-      path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/55c09af5a90d4480b7386892e878927755de6d6fc5f19a2f437f2565ed55e845_sk
+      path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/9116585f0ae6674df27a8844eed8824cf879c42af3a652a0c2f6dae23d1499bb_sk
     signedCert:
       path: crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
+
+  Org2:
+    mspid: Org2MSP
+
+    peers:
+      - peer0.org2.example.com
+      - peer1.org2.example.com
+    certificateAuthorities:
+      - ca.org2.example.com
+    adminPrivateKey:
+      path: crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/98ff1ec350a2d2b67a4501c0e38dd7e79b8a04f20c920774c15852d27ab737f3_sk
+    signedCert:
+      path: crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/Admin@org2.example.com-cert.pem
 
 orderers:
   orderer.example.com:
@@ -59,6 +84,22 @@ peers:
     tlsCACerts:
       path: crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt
 
+  peer0.org2.example.com:
+    url: grpcs://localhost:8051
+    eventUrl: grpcs://localhost:8053
+    grpcOptions:
+      ssl-target-name-override: peer0.org2.example.com
+    tlsCACerts:
+      path: crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+    
+  peer1.org2.example.com:
+    url: grpcs://localhost:8056
+    eventUrl: grpcs://localhost:8058
+    grpcOptions:
+      ssl-target-name-override: peer1.org2.example.com
+    tlsCACerts:
+      path: crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls/ca.crt
+
 certificateAuthorities:
   ca.org1.example.com:
     url: https://localhost:7054
@@ -70,3 +111,14 @@ certificateAuthorities:
       - enrollId: admin
         enrollSecret: adminpw
     caName: ca.org1.example.com
+
+  ca.org2.example.com:
+    url: https://localhost:8054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: crypto-config/peerOrganizations/org2.example.com/ca/ca.org2.example.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.org2.example.com
