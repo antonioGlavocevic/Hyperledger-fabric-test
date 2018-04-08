@@ -8,7 +8,7 @@ let helper = require('./helper.js');
 joinChannel();
 
 async function joinChannel() {
-	var fabric_client = await helper.getClient('user1');
+	var fabric_client = await helper.getClient('org1','user1');
 	var channel = fabric_client.getChannel('mychannel');
 
 	var tx_id = fabric_client.newTransactionID(true);

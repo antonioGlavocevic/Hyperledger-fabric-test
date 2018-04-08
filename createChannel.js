@@ -8,7 +8,7 @@ let helper = require('./helper.js');
 createChannel();
 
 async function createChannel() {
-	var fabric_client = await helper.getClient();
+	var fabric_client = await helper.getClient('org1');
 	console.log('got client');
 	let envelope = fs.readFileSync(path.join(__dirname,'config/channel.tx'));
 	let channelConfig = fabric_client.extractChannelConfig(envelope);

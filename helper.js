@@ -5,9 +5,9 @@ let copService = require('fabric-ca-client');
 let fs = require('fs');
 let path = require('path');
 
-async function getClient(username) {
+async function getClient(organisation, username) {
     var fabric_client = Fabric_Client.loadFromConfig('network-config.yaml');
-    fabric_client.loadFromConfig('org1.yaml');
+    fabric_client.loadFromConfig(organisation+'.yaml');
     await fabric_client.initCredentialStores();
 
     if (username) {
@@ -22,16 +22,16 @@ async function getClient(username) {
     return fabric_client;
 }
 
-var getRegisterUser = async function() {
-    var fabric_client = await getClient();
+var getRegisterUser = async function(organisation, username) {
+    var fabric_client = await getClient(organisation);
 
     var admin = await fabric_client.setUserContext({username: 'admin', password: 'adminpw'});
     var caClient = fabric_client.getCertificateAuthority();
     let secret = await caClient.register({
-        enrollmentID: 'user1',
-        affiliation: 'org1.department1'
+        enrollmentID: username,
+        affiliation: organisation+'.department1'
     }, admin);
-    var user  = await fabric_client.setUserContext({username:'user1', password:secret});
+    var user  = await fabric_client.setUserContext({username:username, password:secret});
     if(user && user.isEnrolled) {
         console.log('secret: \n'+user._enrollmentSecret+'\n');
     } else {

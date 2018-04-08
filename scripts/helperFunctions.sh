@@ -50,7 +50,7 @@ installChaincode() {
 
 instantiateChaincode() {
   setEnv $1 $2
-  peer chaincode instantiate -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C $CHANNEL_NAME -n mycc -v 1.0 -c '{"Args":["init","30"]}' -P "OR ('Org1MSP.member')"
+  peer chaincode instantiate -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C $CHANNEL_NAME -n mycc -v 1.0 -c '{"Args":["init","30"]}' -P "OR ('Org1MSP.member', 'Org2MSP.member')"
   echo "===================== Chaincode instantiated ===================== "
   pauseCheck
 }
