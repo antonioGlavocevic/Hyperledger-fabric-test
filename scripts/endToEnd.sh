@@ -30,12 +30,12 @@ sleep 5
 echo "===================== SETUP END ====================="
 
 echo "===================== TEST RUN BEGIN ===================== "
-invoke 1 0 "[\"reg\",\"Test\"]"
-sleep 5
-query 1 0 "Test"
-query 1 1 "Test"
-query 2 0 "Test"
-query 2 1 "Test"
+# invoke 1 0 "[\"reg\",\"Test\"]"
+# sleep 5
+# query 1 0 "Test"
+# query 1 1 "Test"
+# query 2 0 "Test"
+# query 2 1 "Test"
 echo "===================== TEST RUN END ===================== "
 
 echo "===================== END TO END FINISHED!!! ===================== "
