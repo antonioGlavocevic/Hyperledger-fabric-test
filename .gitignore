@@ -1,7 +1,5 @@
 .DS_Store
 
-channel-artifacts/
-crypto-config/
 node_modules/
 package-lock.json
 hfc-key-store/
