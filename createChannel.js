@@ -10,7 +10,7 @@ createChannel();
 async function createChannel() {
 	var fabric_client = await helper.getClient('org1');
 	console.log('got client');
-	let envelope = fs.readFileSync(path.join(__dirname,'config/channel.tx'));
+	let envelope = fs.readFileSync(path.join(__dirname,'channel-artifacts/channel.tx'));
 	let channelConfig = fabric_client.extractChannelConfig(envelope);
 	let signature = fabric_client.signChannelConfig(channelConfig);
 	let tx_id = fabric_client.newTransactionID(true);

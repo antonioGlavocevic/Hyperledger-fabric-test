@@ -15,7 +15,7 @@ async function query() {
 		targets: ['peer0.org1.example.com','peer1.org1.example.com','peer0.org2.example.com','peer1.org2.example.com'],
 		chaincodeId: 'mycc',
 		fcn: 'query',
-		args: ['TOTAL']
+		args: ['AAAA']
 	};
 	
 	let query_responses = await channel.queryByChaincode(request);
