@@ -15,10 +15,10 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.org1.example.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/dbb5602d47f319446296e339439f0c962b5ce1b97883bf21235b4ade4fcc5a38_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/235ba03b4853dbc8e66dea05b1523a07bc06829ce0d002090eacfd176eb792ec_sk
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/dbb5602d47f319446296e339439f0c962b5ce1b97883bf21235b4ade4fcc5a38_sk
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/235ba03b4853dbc8e66dea05b1523a07bc06829ce0d002090eacfd176eb792ec_sk
     ports:
       - 7054:7054
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
@@ -34,10 +34,10 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.org2.example.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/1f59e4addf7939316824e3f4ca6df7daf21182f5fc46945490a2671a1c2729f5_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/3126b953db2332e6a2f9a10571945c39fe098c91a73d29b6d745e93b43a0d00d_sk
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/1f59e4addf7939316824e3f4ca6df7daf21182f5fc46945490a2671a1c2729f5_sk
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/3126b953db2332e6a2f9a10571945c39fe098c91a73d29b6d745e93b43a0d00d_sk
     ports:
       - 8054:7054
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
@@ -66,7 +66,7 @@ services:
     ports:
       - 7050:7050
     volumes:
-        - ./config/:/etc/hyperledger/configtx
+        - ./channel-artifacts/genesis.block:/etc/hyperledger/configtx/genesis.block
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/:/etc/hyperledger/crypto/orderer
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/:/etc/hyperledger/crypto/peerOrg1
     networks:
@@ -100,7 +100,7 @@ services:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/:/etc/hyperledger/crypto/peer
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
-        - ./config:/etc/hyperledger/configtx
+        #- ./channel-artifacts:/etc/hyperledger/configtx
     depends_on:
       - orderer.example.com
     networks:
@@ -134,7 +134,7 @@ services:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/:/etc/hyperledger/crypto/peer
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
-        - ./config:/etc/hyperledger/configtx
+        #- ./channel-artifacts:/etc/hyperledger/configtx
     depends_on:
       - orderer.example.com
     networks:
@@ -168,7 +168,7 @@ services:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/:/etc/hyperledger/crypto/peer
         - ./crypto-config/peerOrganizations/org2.example.com/users:/etc/hyperledger/msp/users
-        - ./config:/etc/hyperledger/configtx
+        #- ./channel-artifacts:/etc/hyperledger/configtx
     depends_on:
       - orderer.example.com
     networks:
@@ -202,7 +202,7 @@ services:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/:/etc/hyperledger/crypto/peer
         - ./crypto-config/peerOrganizations/org2.example.com/users:/etc/hyperledger/msp/users
-        - ./config:/etc/hyperledger/configtx
+        #- ./channel-artifacts:/etc/hyperledger/configtx
     depends_on:
       - orderer.example.com
     networks:
@@ -231,7 +231,7 @@ services:
         - /var/run/:/host/var/run/
         - ./chaincode/:/opt/gopath/src/github.com/chaincode
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
-        - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
         - ./scripts/:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts
     depends_on:
       - orderer.example.com

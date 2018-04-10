@@ -1,6 +1,6 @@
 .DS_Store
 
-config/
+channel-artifacts/
 crypto-config/
 node_modules/
 package-lock.json
