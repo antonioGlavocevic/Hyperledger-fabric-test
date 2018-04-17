@@ -26,6 +26,6 @@ services:
       - 7050:7050
     volumes:
         - ./channel-artifacts/genesis.block:/etc/hyperledger/configtx/genesis.block
-        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/:/etc/hyperledger/crypto/orderer
+        - ./crypto-config/ordererOrganizations/example.com/orderers/ec2-18-216-125-54.us-east-2.compute.amazonaws.com/:/etc/hyperledger/crypto/orderer
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/:/etc/hyperledger/crypto/peerOrg1
         - ./crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/:/etc/hyperledger/crypto/peerOrg2
