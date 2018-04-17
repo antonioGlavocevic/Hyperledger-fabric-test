@@ -1,3 +1,14 @@
+## Generate crypo
+
+cryptogen generate --config=./crypto-config.yaml
+
+export FABRIC_CFG_PATH=$PWD
+mkdir channel-artifacts
+configtxgen -profile OneOrgOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
+
+export CHANNEL_NAME=mychannel
+configtxgen -profile OneOrgChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
+
 ## Add yourself to network
 
 docker-compose -f docker-compose5.yml up -d

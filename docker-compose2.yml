@@ -12,10 +12,10 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.org1.example.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/3d9c085930505fa3b5ef77545a0fd43e25003baa4d9235e810513d54c2d3eb62_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/cdafb0622e7d09e62f9976c04e110b57cde082e2326a101e9dfa1ae6de0ab64a_sk
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/3d9c085930505fa3b5ef77545a0fd43e25003baa4d9235e810513d54c2d3eb62_sk
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/cdafb0622e7d09e62f9976c04e110b57cde082e2326a101e9dfa1ae6de0ab64a_sk
     ports:
       - 7054:7054
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
@@ -43,7 +43,6 @@ services:
       - CORE_PEER_ADDRESS=peer0.org1.example.com:7051
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
     command: peer node start
-    # command: peer node start --peer-chaincodedev=true
     ports:
       - 7051:7051
       - 7053:7053
@@ -51,4 +50,3 @@ services:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/:/etc/hyperledger/crypto/peer
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
-        #- ./channel-artifacts:/etc/hyperledger/configtx
