@@ -1,14 +1,13 @@
-## Basic Network Config
+## Add yourself to network
 
-Note that this basic configuration uses pre-generated certificates and
-key material, and also has predefined transactions to initialize a 
-channel named "mychannel".
+docker-compose -f docker-compose5.yml up -d
 
-To regenerate this material, simply run ``generate.sh``.
+docker exec -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer1.org1.example.com peer channel fetch config \
+  -o ec2-13-59-126-206.us-east-2.compute.amazonaws.com:7050 -c mychannel --tls \
+  --cafile /etc/hyperledger/crypto/orderer/ec2-13-59-126-206.us-east-2.compute.amazonaws.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
-To start the network, run ``start.sh``.
-To stop it, run ``stop.sh``
-To completely remove all incriminating evidence of the network
-on your system, run ``teardown.sh``.
+docker exec -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.example.com/msp" peer1.org1.example.com peer channel join \
+  -b mychannel_config.block --tls \
+  --cafile /etc/hyperledger/crypto/orderer/ec2-13-59-126-206.us-east-2.compute.amazonaws.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+docker logs -f peer1.org1.example.com
