@@ -9,7 +9,7 @@ configtxgen -profile OneOrgOrdererGenesis -outputBlock ./channel-artifacts/genes
 export CHANNEL_NAME=mychannel
 configtxgen -profile OneOrgChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
 
-## Add yourself to network
+## Add yourself to network NOT UP TO DATE
 
 docker-compose -f docker-compose5.yml up -d
 

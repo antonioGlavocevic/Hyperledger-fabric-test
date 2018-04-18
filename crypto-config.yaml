@@ -11,12 +11,12 @@ OrdererOrgs:
   # Orderer
   # ---------------------------------------------------------------------------
   - Name: Orderer
-    Domain: example.com
+    Domain: hyperfabric.xyz
     # ---------------------------------------------------------------------------
     # "Specs" - See PeerOrgs below for complete description
     # ---------------------------------------------------------------------------
     Specs:
-      - CommonName: ec2-18-216-125-54.us-east-2.compute.amazonaws.com
+      - Hostname: orderer
 # ---------------------------------------------------------------------------
 # "PeerOrgs" - Definition of organizations managing peer nodes
 # ---------------------------------------------------------------------------
@@ -25,7 +25,7 @@ PeerOrgs:
   # Org1
   # ---------------------------------------------------------------------------
   - Name: Org1
-    Domain: org1.example.com
+    Domain: org1.hyperfabric.xyz
     # ---------------------------------------------------------------------------
     # "Specs"
     # ---------------------------------------------------------------------------
@@ -72,7 +72,7 @@ PeerOrgs:
       Count: 1
 
   - Name: Org2
-    Domain: org2.example.com
+    Domain: org2.hyperfabric.xyz
     Template:
       Count: 2
     Users:
