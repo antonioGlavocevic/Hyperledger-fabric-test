@@ -29,3 +29,4 @@ services:
         - ./crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer.hyperfabric.xyz/:/etc/hyperledger/crypto/orderer
         - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg1
         - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg2
+        - ./channel-artifacts/production:/var/hyperledger/production

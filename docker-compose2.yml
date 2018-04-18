@@ -50,3 +50,4 @@ services:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
         - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/users:/etc/hyperledger/msp/users
+        - ./channel-artifacts/production:/var/hyperledger/production

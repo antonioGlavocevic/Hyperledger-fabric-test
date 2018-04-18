@@ -1,6 +1,2 @@
 .DS_Store
-
-node_modules/
-package-lock.json
-hfc-key-store/
-hfc-key-store2/
+channel-artifacts/production/
