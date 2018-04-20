@@ -51,3 +51,6 @@ services:
         - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
         - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/users:/etc/hyperledger/msp/users
         - ./channel-artifacts/production:/var/hyperledger/production
+        # TESTING ANCHORS
+        - ./crypto-config/ordererOrganizations/hyperfabric.xyz/orderers:/etc/hyperledger/crypto/orderer
+        - ./channel-artifacts/Org2MSPanchors.tx:/opt/gopath/src/github.com/hyperledger/fabric/channel-artifacts/Org2MSPanchors.tx
