@@ -1,13 +1,21 @@
 ## Generate crypo
 
+# Certs and keys
 cryptogen generate --config=./crypto-config.yaml
 
+# Genesis block
 export FABRIC_CFG_PATH=$PWD
 mkdir channel-artifacts
 configtxgen -profile OneOrgOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
 
+# Channel
 export CHANNEL_NAME=mychannel
 configtxgen -profile OneOrgChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
+
+# Anchor peers
+export CHANNEL_NAME=mychannel
+configtxgen -profile OneOrgChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+configtxgen -profile OneOrgChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
 
 ## Add yourself to network
 
