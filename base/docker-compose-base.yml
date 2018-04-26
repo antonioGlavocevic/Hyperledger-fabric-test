@@ -5,7 +5,7 @@ services:
   orderer0.hyperfabric.xyz:
     container_name: orderer0.hyperfabric.xyz
     extends:
-      file: orderer-base.yaml
+      file: orderer-base.yml
       service: orderer-base
     ports:
       - 7050:7050
@@ -19,7 +19,7 @@ services:
   orderer1.hyperfabric.xyz:
     container_name: orderer1.hyperfabric.xyz
     extends:
-      file: orderer-base.yaml
+      file: orderer-base.yml
       service: orderer-base
     ports:
       - 7050:7050
@@ -50,7 +50,7 @@ services:
   peer0.org1.hyperfabric.xyz:
     container_name: peer0.org1.hyperfabric.xyz
     extends:
-      file: peer-base.yaml
+      file: peer-base.yml
       service: peer-base
     environment:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.hyperfabric.xyz:7051
@@ -69,7 +69,7 @@ services:
   peer1.org1.hyperfabric.xyz:
     container_name: peer1.org1.hyperfabric.xyz
     extends:
-      file: peer-base.yaml
+      file: peer-base.yml
       service: peer-base
     environment:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.hyperfabric.xyz:7051
@@ -105,7 +105,7 @@ services:
   peer0.org2.hyperfabric.xyz:
     container_name: peer0.org2.hyperfabric.xyz
     extends:
-      file: peer-base.yaml
+      file: peer-base.yml
       service: peer-base
     environment:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.hyperfabric.xyz:7051
@@ -124,7 +124,7 @@ services:
   peer1.org2.hyperfabric.xyz:
     container_name: peer1.org2.hyperfabric.xyz
     extends:
-      file: peer-base.yaml
+      file: peer-base.yml
       service: peer-base
     environment:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org2.hyperfabric.xyz:7051
@@ -143,7 +143,7 @@ services:
   zookeeper0.hyperfabric.xyz:
     container_name: zookeeper0.hyperfabric.xyz
     extends:
-      file: kafka-base.yaml
+      file: kafka-base.yml
       service: zookeeper
     environment:
       - ZOO_MY_ID=1
@@ -155,7 +155,7 @@ services:
   zookeeper1.hyperfabric.xyz:
     container_name: zookeeper1.hyperfabric.xyz
     extends:
-      file: kafka-base.yaml
+      file: kafka-base.yml
       service: zookeeper
     environment:
       - ZOO_MY_ID=2
@@ -167,7 +167,7 @@ services:
   zookeeper2.hyperfabric.xyz:
     container_name: zookeeper2.hyperfabric.xyz
     extends:
-      file: kafka-base.yaml
+      file: kafka-base.yml
       service: zookeeper
     environment:
       - ZOO_MY_ID=3
@@ -179,7 +179,7 @@ services:
   kafka0.hyperfabric.xyz:
     container_name: kafka0.hyperfabric.xyz
     extends:
-      file: kafka-base.yaml
+      file: kafka-base.yml
       service: kafka
     environment:
       - KAFKA_BROKER_ID=0
@@ -190,7 +190,7 @@ services:
   kafka1.hyperfabric.xyz:
     container_name: kafka1.hyperfabric.xyz
     extends:
-      file: kafka-base.yaml
+      file: kafka-base.yml
       service: kafka
     environment:
       - KAFKA_BROKER_ID=1
@@ -201,7 +201,7 @@ services:
   kafka2.hyperfabric.xyz:
     container_name: kafka2.hyperfabric.xyz
     extends:
-      file: kafka-base.yaml
+      file: kafka-base.yml
       service: kafka
     environment:
       - KAFKA_BROKER_ID=2
@@ -212,7 +212,7 @@ services:
   kafka3.hyperfabric.xyz:
     container_name: kafka3.hyperfabric.xyz
     extends:
-      file: kafka-base.yaml
+      file: kafka-base.yml
       service: kafka
     environment:
       - KAFKA_BROKER_ID=3

@@ -3,30 +3,30 @@ version: '2'
 services:
   orderer1.hyperfabric.xyz:
     extends:
-      file:   base/docker-compose-base.yaml
+      file:   base/docker-compose-base.yml
       service: orderer1.hyperfabric.xyz
     container_name: orderer1.hyperfabric.xyz
 
   ca.org2.hyperfabric.xyz:
     container_name: ca.org2.hyperfabric.xyz
     extends:
-      file: base/docker-compose-base.yaml
+      file: base/docker-compose-base.yml
       service: ca.org2.hyperfabric.xyz
 
   peer0.org2.example.com:
     container_name: peer0.org2.example.com
     extends:
-      file:  base/docker-compose-base.yaml
+      file:  base/docker-compose-base.yml
       service: peer0.org2.example.com
 
   peer1.org2.example.com:
     container_name: peer1.org2.example.com
     extends:
-      file:  base/docker-compose-base.yaml
+      file:  base/docker-compose-base.yml
       service: peer1.org2.example.com
 
   kafka3.hyperfabric.xyz:
     container_name: kafka3.hyperfabric.xyz
     extends:
-      file: base/docker-compose-base.yaml
+      file: base/docker-compose-base.yml
       service: kafka3.hyperfabric.xyz
