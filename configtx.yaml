@@ -131,8 +131,8 @@ Orderer: &OrdererDefaults
         Brokers:
             - kafka0.example.com:9092
             - kafka1.example.com:10092
-            - kafka2.example.com:9092
-            - kafka3.example.com:9092
+            - kafka2.example.com:11092
+            - kafka3.example.com:12092
 
     # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network

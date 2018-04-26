@@ -206,8 +206,8 @@ services:
     environment:
       - KAFKA_BROKER_ID=2
     ports:
-      - 9092:9092
-      - 9093:9093
+      - 11092:9092
+      - 11093:9093
 
   kafka3.hyperfabric.xyz:
     container_name: kafka3.hyperfabric.xyz
@@ -217,5 +217,5 @@ services:
     environment:
       - KAFKA_BROKER_ID=3
     ports:
-      - 9092:9092
-      - 9093:9093
+      - 12092:9092
+      - 12093:9093

@@ -12,7 +12,7 @@ services:
       # server has. There are two port numbers `nnnnn`. The first is what
       # followers use to connect to the leader, while the second is for leader
       # election.
-      - ZOO_SERVERS=server.1=zookeeper0.hyperfabric.xyz:2888:3888 server.2=zookeeper1.hyperfabric.xyz:12888:13888 server.3=zookeeper2.hyperfabric.xyz:22888:23888
+      - ZOO_SERVERS=server.1=zookeeper0.hyperfabric.xyz:2888:3888 server.2=zookeeper1.hyperfabric.xyz:2888:3888 server.3=zookeeper2.hyperfabric.xyz:2888:3888
     restart: always
 
   kafka:
@@ -76,7 +76,7 @@ services:
       #
       # zookeper.connect
       # Point to the set of Zookeeper nodes comprising a ZK ensemble.
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0.hyperfabric.xyz:2181,zookeeper1.hyperfabric.xyz:12181,zookeeper2.hyperfabric.xyz:22181
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0.hyperfabric.xyz:2181,zookeeper1.hyperfabric.xyz:2181,zookeeper2.hyperfabric.xyz:2181
       #
       # zookeeper.connection.timeout.ms
       # The max time that the client waits to establish a connection to

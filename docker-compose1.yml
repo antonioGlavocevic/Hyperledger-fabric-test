@@ -30,3 +30,15 @@ services:
     extends:
       file: base/docker-compose-base.yml
       service: kafka1.hyperfabric.xyz
+
+    kafka2.hyperfabric.xyz:
+    container_name: kafka2.hyperfabric.xyz
+    extends:
+      file: base/docker-compose-base.yml
+      service: kafka2.hyperfabric.xyz
+
+  kafka3.hyperfabric.xyz:
+    container_name: kafka3.hyperfabric.xyz
+    extends:
+      file: base/docker-compose-base.yml
+      service: kafka3.hyperfabric.xyz

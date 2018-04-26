@@ -24,9 +24,3 @@ services:
     extends:
       file:  base/docker-compose-base.yml
       service: peer1.org2.hyperfabric.xyz
-
-  kafka3.hyperfabric.xyz:
-    container_name: kafka3.hyperfabric.xyz
-    extends:
-      file: base/docker-compose-base.yml
-      service: kafka3.hyperfabric.xyz
