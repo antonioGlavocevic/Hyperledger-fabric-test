@@ -1,0 +1,221 @@
+version: '2'
+
+services:
+
+  orderer0.hyperfabric.xyz:
+    container_name: orderer0.hyperfabric.xyz
+    extends:
+      file: orderer-base.yaml
+      service: orderer-base
+    ports:
+      - 7050:7050
+    volumes:
+        - ./channel-artifacts/genesis.block:/etc/hyperledger/configtx/genesis.block
+        - ./crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer0.hyperfabric.xyz/:/etc/hyperledger/crypto/orderer
+        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg1
+        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg2
+        - ./channel-artifacts/production:/var/hyperledger/production
+
+  orderer1.hyperfabric.xyz:
+    container_name: orderer1.hyperfabric.xyz
+    extends:
+      file: orderer-base.yaml
+      service: orderer-base
+    ports:
+      - 7050:7050
+    volumes:
+        - ./channel-artifacts/genesis.block:/etc/hyperledger/configtx/genesis.block
+        - ./crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer1.hyperfabric.xyz/:/etc/hyperledger/crypto/orderer
+        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg1
+        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg2
+        - ./channel-artifacts/production:/var/hyperledger/production
+
+  ca.org1.hyperfabric.xyz:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.org1.hyperfabric.xyz
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.hyperfabric.xyz-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/effcaac606ea56b62cce3abe8fb72daf8959339dacba5f4cb30a37f3ac54609d_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.hyperfabric.xyz-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/effcaac606ea56b62cce3abe8fb72daf8959339dacba5f4cb30a37f3ac54609d_sk
+    ports:
+      - 7054:7054
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.org1.hyperfabric.xyz
+
+  peer0.org1.hyperfabric.xyz:
+    container_name: peer0.org1.hyperfabric.xyz
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.hyperfabric.xyz:7051
+      - CORE_PEER_ID=peer0.org1.hyperfabric.xyz
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_ADDRESS=peer0.org1.hyperfabric.xyz:7051
+    ports:
+      - 7051:7051
+      - 7053:7053
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
+        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/users:/etc/hyperledger/msp/users
+        - ./channel-artifacts/production:/var/hyperledger/production
+
+  peer1.org1.hyperfabric.xyz:
+    container_name: peer1.org1.hyperfabric.xyz
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.hyperfabric.xyz:7051
+      - CORE_PEER_ID=peer1.org1.hyperfabric.xyz
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_ADDRESS=peer1.org1.hyperfabric.xyz:7051
+    ports:
+      - 7056:7051
+      - 7058:7053
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer1.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
+        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/users:/etc/hyperledger/msp/users
+        - ./channel-artifacts/production:/var/hyperledger/production
+
+  ca.org2.hyperfabric.xyz:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.org2.hyperfabric.xyz
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.hyperfabric.xyz-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ab5c72a51921d3fe59d56b77e53ec9c7295a740d2a670fb6a0092aeb56d257e9_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.hyperfabric.xyz-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ab5c72a51921d3fe59d56b77e53ec9c7295a740d2a670fb6a0092aeb56d257e9_sk
+    ports:
+      - 7054:7054
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.org2.hyperfabric.xyz
+
+  peer0.org2.hyperfabric.xyz:
+    container_name: peer0.org2.hyperfabric.xyz
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.hyperfabric.xyz:7051
+      - CORE_PEER_ID=peer0.org2.hyperfabric.xyz
+      - CORE_PEER_LOCALMSPID=Org2MSP
+      - CORE_PEER_ADDRESS=peer0.org2.hyperfabric.xyz:7051
+    ports:
+      - 7051:7051
+      - 7053:7053
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
+        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/users:/etc/hyperledger/msp/users
+        - ./channel-artifacts/production:/var/hyperledger/production
+
+  peer1.org2.hyperfabric.xyz:
+    container_name: peer1.org2.hyperfabric.xyz
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org2.hyperfabric.xyz:7051
+      - CORE_PEER_ID=peer1.org2.hyperfabric.xyz
+      - CORE_PEER_LOCALMSPID=Org2MSP
+      - CORE_PEER_ADDRESS=peer1.org2.hyperfabric.xyz:7051
+    ports:
+      - 7056:7051
+      - 7058:7053
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer1.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
+        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/users:/etc/hyperledger/msp/users
+        - ./channel-artifacts/production:/var/hyperledger/production
+
+  zookeeper0.hyperfabric.xyz:
+    container_name: zookeeper0.hyperfabric.xyz
+    extends:
+      file: kafka-base.yaml
+      service: zookeeper
+    environment:
+      - ZOO_MY_ID=1
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+
+  zookeeper1.hyperfabric.xyz:
+    container_name: zookeeper1.hyperfabric.xyz
+    extends:
+      file: kafka-base.yaml
+      service: zookeeper
+    environment:
+      - ZOO_MY_ID=2
+    ports:
+      - 12181:2181
+      - 12888:2888
+      - 13888:3888
+
+  zookeeper2.hyperfabric.xyz:
+    container_name: zookeeper2.hyperfabric.xyz
+    extends:
+      file: kafka-base.yaml
+      service: zookeeper
+    environment:
+      - ZOO_MY_ID=3
+    ports:
+      - 22181:2181
+      - 22888:2888
+      - 23888:3888
+
+  kafka0.hyperfabric.xyz:
+    container_name: kafka0.hyperfabric.xyz
+    extends:
+      file: kafka-base.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=0
+    ports:
+      - 9092:9092
+      - 9093:9093
+
+  kafka1.hyperfabric.xyz:
+    container_name: kafka1.hyperfabric.xyz
+    extends:
+      file: kafka-base.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=1
+    ports:
+      - 10092:9092
+      - 10093:9093
+
+  kafka2.hyperfabric.xyz:
+    container_name: kafka2.hyperfabric.xyz
+    extends:
+      file: kafka-base.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=2
+    ports:
+      - 9092:9092
+      - 9093:9093
+
+  kafka3.hyperfabric.xyz:
+    container_name: kafka3.hyperfabric.xyz
+    extends:
+      file: kafka-base.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=3
+    ports:
+      - 9092:9092
+      - 9093:9093

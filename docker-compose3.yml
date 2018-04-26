@@ -1,81 +1,32 @@
-#
-# Copyright IBM Corp All Rights Reserved
-#
-# SPDX-License-Identifier: Apache-2.0
-#
 version: '2'
 
 services:
+  orderer1.hyperfabric.xyz:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer1.hyperfabric.xyz
+    container_name: orderer1.hyperfabric.xyz
+
   ca.org2.hyperfabric.xyz:
-    image: hyperledger/fabric-ca
-    environment:
-      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.org2.hyperfabric.xyz
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.hyperfabric.xyz-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ab5c72a51921d3fe59d56b77e53ec9c7295a740d2a670fb6a0092aeb56d257e9_sk
-      - FABRIC_CA_SERVER_TLS_ENABLED=true
-      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.hyperfabric.xyz-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ab5c72a51921d3fe59d56b77e53ec9c7295a740d2a670fb6a0092aeb56d257e9_sk
-    ports:
-      - 7054:7054
-    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
-    volumes:
-      - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.org2.hyperfabric.xyz
+    extends:
+      file: base/docker-compose-base.yaml
+      service: ca.org2.hyperfabric.xyz
 
-  peer0.org2.hyperfabric.xyz:
-    container_name: peer0.org2.hyperfabric.xyz
-    image: hyperledger/fabric-peer
-    environment:
-      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_default
-      - CORE_LOGGING_LEVEL=DEBUG
-      - CORE_LOGGING_GOSSIP=INFO
-      - CORE_PEER_GOSSIP_USELEADERELECTION=true
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.hyperfabric.xyz:7051
-      - CORE_PEER_GOSSIP_ORGLEADER=false
-      - CORE_PEER_GOSSIP_SKIPHANDSHAKE=true
-      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
-      - CORE_PEER_TLS_ENABLED=true
-      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
-      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
-      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
-      - CORE_PEER_ID=peer0.org2.hyperfabric.xyz
-      - CORE_PEER_LOCALMSPID=Org2MSP
-      - CORE_PEER_ADDRESS=peer0.org2.hyperfabric.xyz:7051
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    command: peer node start
-    ports:
-      - 7051:7051
-      - 7053:7053
-    volumes:
-        - /var/run/:/host/var/run/
-        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
-        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/users:/etc/hyperledger/msp/users
-        - ./channel-artifacts/production:/var/hyperledger/production
+  peer0.org2.example.com:
+    container_name: peer0.org2.example.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.org2.example.com
 
-  cli:
-    container_name: cli
-    image: hyperledger/fabric-tools
-    tty: true
-    environment:
-      - GOPATH=/opt/gopath
-      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      #- CORE_LOGGING_LEVEL=DEBUG
-      - CORE_LOGGING_LEVEL=INFO
-      - CORE_PEER_ID=cli
-      - CORE_PEER_ADDRESS=peer0.org1.hyperfabric.xyz:7051
-      - CORE_PEER_LOCALMSPID=Org1MSP
-      - CORE_PEER_TLS_ENABLED=true
-      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/tls/server.crt
-      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/tls/server.key
-      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/tls/ca.crt
-      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.hyperfabric.xyz/users/Admin@org1.hyperfabric.xyz/msp
-      - CHANNEL_NAME=mychannel
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
-    volumes:
-        - /var/run/:/host/var/run/
-        - ./chaincode/:/opt/gopath/src/github.com/chaincode
-        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
-        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
-        - ./scripts/:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts
+  peer1.org2.example.com:
+    container_name: peer1.org2.example.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.org2.example.com
+
+  kafka3.hyperfabric.xyz:
+    container_name: kafka3.hyperfabric.xyz
+    extends:
+      file: base/docker-compose-base.yaml
+      service: kafka3.hyperfabric.xyz

@@ -1,32 +1,32 @@
-#
-# Copyright IBM Corp All Rights Reserved
-#
-# SPDX-License-Identifier: Apache-2.0
-#
 version: '2'
 
 services:
-  orderer.hyperfabric.xyz:
-    container_name: orderer.hyperfabric.xyz
-    image: hyperledger/fabric-orderer
-    environment:
-      - ORDERER_GENERAL_LOGLEVEL=debug
-      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-      - ORDERER_GENERAL_GENESISMETHOD=file
-      - ORDERER_GENERAL_GENESISFILE=/etc/hyperledger/configtx/genesis.block
-      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
-      - ORDERER_GENERAL_LOCALMSPDIR=/etc/hyperledger/crypto/orderer/msp
-      - ORDERER_GENERAL_TLS_ENABLED=true
-      - ORDERER_GENERAL_TLS_PRIVATEKEY=/etc/hyperledger/crypto/orderer/tls/server.key
-      - ORDERER_GENERAL_TLS_CERTIFICATE=/etc/hyperledger/crypto/orderer/tls/server.crt
-      - ORDERER_GENERAL_TLS_ROOTCAS=[/etc/hyperledger/crypto/orderer/tls/ca.crt, /etc/hyperledger/crypto/peerOrg1/tls/ca.crt, /etc/hyperledger/crypto/peerOrg2/tls/ca.crt]
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
-    command: orderer
-    ports:
-      - 7050:7050
-    volumes:
-        - ./channel-artifacts/genesis.block:/etc/hyperledger/configtx/genesis.block
-        - ./crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer.hyperfabric.xyz/:/etc/hyperledger/crypto/orderer
-        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg1
-        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg2
-        - ./channel-artifacts/production:/var/hyperledger/production
+  zookeeper0.hyperfabric.xyz:
+    container_name: zookeeper0.hyperfabric.xyz
+    extends:
+      file: base/docker-compose-base.yaml
+      service: zookeeper0.hyperfabric.xyz
+
+  zookeeper1.hyperfabric.xyz:
+    container_name: zookeeper1.hyperfabric.xyz
+    extends:
+      file: base/docker-compose-base.yaml
+      service: zookeeper1.hyperfabric.xyz
+
+  zookeeper2.hyperfabric.xyz:
+    container_name: zookeeper2.hyperfabric.xyz
+    extends:
+      file: base/docker-compose-base.yaml
+      service: zookeeper2.hyperfabric.xyz
+
+  kafka0.hyperfabric.xyz:
+    container_name: kafka0.hyperfabric.xyz
+    extends:
+      file: base/docker-compose-base.yaml
+      service: kafka0.hyperfabric.xyz
+
+  kafka1.hyperfabric.xyz:
+    container_name: kafka1.hyperfabric.xyz
+    extends:
+      file: base/docker-compose-base.yaml
+      service: kafka1.hyperfabric.xyz
