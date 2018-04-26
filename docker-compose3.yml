@@ -1,12 +1,6 @@
 version: '2'
 
 services:
-  orderer1.hyperfabric.xyz:
-    extends:
-      file:   base/docker-compose-base.yml
-      service: orderer1.hyperfabric.xyz
-    container_name: orderer1.hyperfabric.xyz
-
   ca.org2.hyperfabric.xyz:
     container_name: ca.org2.hyperfabric.xyz
     extends:

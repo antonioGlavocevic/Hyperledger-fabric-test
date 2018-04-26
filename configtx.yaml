@@ -105,7 +105,7 @@ Orderer: &OrdererDefaults
 
     Addresses:
         - orderer0.hyperfabric.xyz:7050
-        - orderer1.hyperfabric.xyz:7050
+        - orderer1.hyperfabric.xyz:8050
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
