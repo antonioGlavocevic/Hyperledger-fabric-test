@@ -10,11 +10,11 @@ services:
     ports:
       - 7050:7050
     volumes:
-        - ./channel-artifacts/genesis.block:/etc/hyperledger/configtx/genesis.block
-        - ./crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer0.hyperfabric.xyz/:/etc/hyperledger/crypto/orderer
-        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg1
-        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg2
-        - ./channel-artifacts/production/orderer:/var/hyperledger/production
+        - ../channel-artifacts/genesis.block:/etc/hyperledger/configtx/genesis.block
+        - ../crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer0.hyperfabric.xyz/:/etc/hyperledger/crypto/orderer
+        - ../crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg1
+        - ../crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg2
+        - ../channel-artifacts/production/orderer:/var/hyperledger/production
 
   orderer1.hyperfabric.xyz:
     container_name: orderer1.hyperfabric.xyz
@@ -24,11 +24,11 @@ services:
     ports:
       - 7050:7050
     volumes:
-        - ./channel-artifacts/genesis.block:/etc/hyperledger/configtx/genesis.block
-        - ./crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer1.hyperfabric.xyz/:/etc/hyperledger/crypto/orderer
-        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg1
-        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg2
-        - ./channel-artifacts/production/orderer:/var/hyperledger/production
+        - ../channel-artifacts/genesis.block:/etc/hyperledger/configtx/genesis.block
+        - ../crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer1.hyperfabric.xyz/:/etc/hyperledger/crypto/orderer
+        - ../crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg1
+        - ../crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg2
+        - ../channel-artifacts/production/orderer:/var/hyperledger/production
 
   ca.org1.hyperfabric.xyz:
     image: hyperledger/fabric-ca
@@ -44,7 +44,7 @@ services:
       - 7054:7054
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ../crypto-config/peerOrganizations/org1.hyperfabric.xyz/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.org1.hyperfabric.xyz
 
   peer0.org1.hyperfabric.xyz:
@@ -62,9 +62,9 @@ services:
       - 7053:7053
     volumes:
         - /var/run/:/host/var/run/
-        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
-        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/users:/etc/hyperledger/msp/users
-        - ./channel-artifacts/production/peer0:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
+        - ../crypto-config/peerOrganizations/org1.hyperfabric.xyz/users:/etc/hyperledger/msp/users
+        - ../channel-artifacts/production/peer0:/var/hyperledger/production
 
   peer1.org1.hyperfabric.xyz:
     container_name: peer1.org1.hyperfabric.xyz
@@ -81,9 +81,9 @@ services:
       - 7058:7053
     volumes:
         - /var/run/:/host/var/run/
-        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer1.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
-        - ./crypto-config/peerOrganizations/org1.hyperfabric.xyz/users:/etc/hyperledger/msp/users
-        - ./channel-artifacts/production/peer1:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer1.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
+        - ../crypto-config/peerOrganizations/org1.hyperfabric.xyz/users:/etc/hyperledger/msp/users
+        - ../channel-artifacts/production/peer1:/var/hyperledger/production
 
   ca.org2.hyperfabric.xyz:
     image: hyperledger/fabric-ca
@@ -99,7 +99,7 @@ services:
       - 7054:7054
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ../crypto-config/peerOrganizations/org2.hyperfabric.xyz/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.org2.hyperfabric.xyz
 
   peer0.org2.hyperfabric.xyz:
@@ -117,9 +117,9 @@ services:
       - 7053:7053
     volumes:
         - /var/run/:/host/var/run/
-        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
-        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/users:/etc/hyperledger/msp/users
-        - ./channel-artifacts/production/peer0:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
+        - ../crypto-config/peerOrganizations/org2.hyperfabric.xyz/users:/etc/hyperledger/msp/users
+        - ../channel-artifacts/production/peer0:/var/hyperledger/production
 
   peer1.org2.hyperfabric.xyz:
     container_name: peer1.org2.hyperfabric.xyz
@@ -136,9 +136,9 @@ services:
       - 7058:7053
     volumes:
         - /var/run/:/host/var/run/
-        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer1.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
-        - ./crypto-config/peerOrganizations/org2.hyperfabric.xyz/users:/etc/hyperledger/msp/users
-        - ./channel-artifacts/production/peer1:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer1.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
+        - ../crypto-config/peerOrganizations/org2.hyperfabric.xyz/users:/etc/hyperledger/msp/users
+        - ../channel-artifacts/production/peer1:/var/hyperledger/production
 
   zookeeper0.hyperfabric.xyz:
     container_name: zookeeper0.hyperfabric.xyz
