@@ -13,17 +13,17 @@ services:
       file: base/docker-compose-base.yml
       service: ca.org1.hyperfabric.xyz
 
-  peer0.org1.example.com:
-    container_name: peer0.org1.example.com
+  peer0.org1.hyperfabric.xyz:
+    container_name: peer0.org1.hyperfabric.xyz
     extends:
       file:  base/docker-compose-base.yml
-      service: peer0.org1.example.com
+      service: peer0.org1.hyperfabric.xyz
 
-  peer1.org1.example.com:
-    container_name: peer1.org1.example.com
+  peer1.org1.hyperfabric.xyz:
+    container_name: peer1.org1.hyperfabric.xyz
     extends:
       file:  base/docker-compose-base.yml
-      service: peer1.org1.example.com
+      service: peer1.org1.hyperfabric.xyz
 
   kafka2.hyperfabric.xyz:
     container_name: kafka2.hyperfabric.xyz
