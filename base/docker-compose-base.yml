@@ -150,15 +150,15 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.org3.hyperfabric.xyz
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org3.hyperfabric.xyz-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/900d5d946b1e614015303def931a087f6a6b83d6b0a00914468bc94e19483634_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/49d422cdcbc1ba1cae3e0ab9ceeb8ba433458347b94277a87352b251f5aeccaf_sk
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org3.hyperfabric.xyz-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/900d5d946b1e614015303def931a087f6a6b83d6b0a00914468bc94e19483634_sk
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/49d422cdcbc1ba1cae3e0ab9ceeb8ba433458347b94277a87352b251f5aeccaf_sk
     ports:
       - 7054:7054
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ../crypto-config/peerOrganizations/org3.hyperfabric.xyz/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ../org3-artifacts/crypto-config/peerOrganizations/org3.hyperfabric.xyz/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.org3.hyperfabric.xyz
 
   peer0.org3.hyperfabric.xyz:
@@ -170,15 +170,15 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org3.hyperfabric.xyz:7051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org3.hyperfabric.xyz:7051
       - CORE_PEER_ID=peer0.org3.hyperfabric.xyz
-      - CORE_PEER_LOCALMSPID=org3MSP
+      - CORE_PEER_LOCALMSPID=Org3MSP
       - CORE_PEER_ADDRESS=peer0.org3.hyperfabric.xyz:7051
     ports:
       - 7051:7051
       - 7053:7053
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/org3.hyperfabric.xyz/peers/peer0.org3.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
-        - ../crypto-config/peerOrganizations/org3.hyperfabric.xyz/users:/etc/hyperledger/msp/users
+        - ../org3-artifacts/crypto-config/peerOrganizations/org3.hyperfabric.xyz/peers/peer0.org3.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
+        - ../org3-artifacts/crypto-config/peerOrganizations/org3.hyperfabric.xyz/users:/etc/hyperledger/msp/users
         - ../channel-artifacts/production/peer0:/var/hyperledger/production
 
   peer1.org3.hyperfabric.xyz:
@@ -190,15 +190,15 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org3.hyperfabric.xyz:7056
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org3.hyperfabric.xyz:7051
       - CORE_PEER_ID=peer1.org3.hyperfabric.xyz
-      - CORE_PEER_LOCALMSPID=org3MSP
+      - CORE_PEER_LOCALMSPID=Org3MSP
       - CORE_PEER_ADDRESS=peer1.org3.hyperfabric.xyz:7051
     ports:
       - 7056:7051
       - 7058:7053
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/org3.hyperfabric.xyz/peers/peer1.org3.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
-        - ../crypto-config/peerOrganizations/org3.hyperfabric.xyz/users:/etc/hyperledger/msp/users
+        - ../org3-artifacts/crypto-config/peerOrganizations/org3.hyperfabric.xyz/peers/peer1.org3.hyperfabric.xyz/:/etc/hyperledger/crypto/peer
+        - ../org3-artifacts/crypto-config/peerOrganizations/org3.hyperfabric.xyz/users:/etc/hyperledger/msp/users
         - ../channel-artifacts/production/peer1:/var/hyperledger/production
 
   zookeeper0.hyperfabric.xyz:
