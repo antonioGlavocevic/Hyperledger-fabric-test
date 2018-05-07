@@ -30,6 +30,20 @@ services:
         - ../crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg2
         - ../channel-artifacts/production/orderer1:/var/hyperledger/production
 
+  orderer2.hyperfabric.xyz:
+    container_name: orderer2.hyperfabric.xyz
+    extends:
+      file: orderer-base.yml
+      service: orderer-base
+    ports:
+      - 9050:7050
+    volumes:
+        - ../channel-artifacts/genesis.block:/etc/hyperledger/configtx/genesis.block
+        - ../crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer2.hyperfabric.xyz/:/etc/hyperledger/crypto/orderer
+        - ../crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg1
+        - ../crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/:/etc/hyperledger/crypto/peerOrg2
+        - ../channel-artifacts/production/orderer2:/var/hyperledger/production
+
   ca.org1.hyperfabric.xyz:
     image: hyperledger/fabric-ca
     environment:
