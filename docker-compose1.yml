@@ -42,15 +42,3 @@ services:
     extends:
       file: base/docker-compose-base.yml
       service: kafka3.hyperfabric.xyz
-
-  orderer0.hyperfabric.xyz:
-    extends:
-      file:   base/docker-compose-base.yml
-      service: orderer0.hyperfabric.xyz
-    container_name: orderer0.hyperfabric.xyz
-
-  orderer1.hyperfabric.xyz:
-    extends:
-      file:   base/docker-compose-base.yml
-      service: orderer1.hyperfabric.xyz
-    container_name: orderer1.hyperfabric.xyz
