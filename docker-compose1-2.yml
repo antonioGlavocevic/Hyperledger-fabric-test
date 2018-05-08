@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  orderer2.hyperfabric.xyz:
+    extends:
+      file:   base/docker-compose-base.yml
+      service: orderer2.hyperfabric.xyz
+    container_name: orderer2.hyperfabric.xyz
+    networks:
+      - net_default

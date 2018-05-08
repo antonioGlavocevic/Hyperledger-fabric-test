@@ -54,9 +54,3 @@ services:
       file:   base/docker-compose-base.yml
       service: orderer1.hyperfabric.xyz
     container_name: orderer1.hyperfabric.xyz
-
-  orderer2.hyperfabric.xyz:
-    extends:
-      file:   base/docker-compose-base.yml
-      service: orderer2.hyperfabric.xyz
-    container_name: orderer2.hyperfabric.xyz
