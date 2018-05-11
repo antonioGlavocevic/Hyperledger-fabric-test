@@ -76,7 +76,7 @@ services:
       #
       # zookeper.connect
       # Point to the set of Zookeeper nodes comprising a ZK ensemble.
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0.hyperfabric.xyz:2181,zookeeper1.hyperfabric.xyz:2181,zookeeper2.hyperfabric.xyz:2181
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0.hyperfabric.xyz:2181,zookeeper1.hyperfabric.xyz:12181,zookeeper2.hyperfabric.xyz:22181
       #
       # zookeeper.connection.timeout.ms
       # The max time that the client waits to establish a connection to
