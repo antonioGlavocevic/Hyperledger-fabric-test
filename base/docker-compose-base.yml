@@ -208,6 +208,9 @@ services:
       service: zookeeper
     environment:
       - ZOO_MY_ID=1
+    volumes:
+      - ../channel-artifacts/production/zookeeper0/data:/data
+      - ../channel-artifacts/production/zookeeper0/datalog:/datalog
     ports:
       - 2181:2181
       - 2888:2888
@@ -220,6 +223,9 @@ services:
       service: zookeeper
     environment:
       - ZOO_MY_ID=2
+    volumes:
+      - ../channel-artifacts/production/zookeeper1/data:/data
+      - ../channel-artifacts/production/zookeeper1/datalog:/datalog
     ports:
       - 12181:2181
       - 12888:2888
@@ -232,6 +238,9 @@ services:
       service: zookeeper
     environment:
       - ZOO_MY_ID=3
+    volumes:
+      - ../channel-artifacts/production/zookeeper2/data:/data
+      - ../channel-artifacts/production/zookeeper2/datalog:/datalog
     ports:
       - 22181:2181
       - 22888:2888
@@ -246,6 +255,8 @@ services:
       - KAFKA_BROKER_ID=0
       - KAFKA_PORT=9092
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka0.hyperfabric.xyz:9092
+    volumes:
+      - ../channel-artifacts/production/kafka0:/tmp/kafka-logs
     ports:
       - 9092:9092
       - 9093:9093
@@ -259,6 +270,8 @@ services:
       - KAFKA_BROKER_ID=1
       - KAFKA_PORT=10092
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka1.hyperfabric.xyz:10092
+    volumes:
+      - ../channel-artifacts/production/kafka1:/tmp/kafka-logs
     ports:
       - 10092:10092
       - 10093:9093
@@ -272,6 +285,8 @@ services:
       - KAFKA_BROKER_ID=2
       - KAFKA_PORT=11092
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka2.hyperfabric.xyz:11092
+    volumes:
+      - ../channel-artifacts/production/kafka2:/tmp/kafka-logs
     ports:
       - 11092:11092
       - 11093:9093
@@ -285,6 +300,8 @@ services:
       - KAFKA_BROKER_ID=3
       - KAFKA_PORT=12092
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka3.hyperfabric.xyz:12092
+    volumes:
+      - ../channel-artifacts/production/kafka3:/tmp/kafka-logs
     ports:
       - 12092:12092
       - 12093:9093
